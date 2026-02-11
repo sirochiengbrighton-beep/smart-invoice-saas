@@ -1,13 +1,15 @@
 {
   "name": "smart-invoice-saas",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Automated invoice reminder SaaS",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "postinstall": "npm rebuild sqlite3 --build-from-source",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Brighton",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
@@ -17,8 +19,4 @@
     "nodemailer": "^8.0.1",
     "sqlite3": "^5.1.7"
   }
-}
-"scripts": {
-  "start": "node server.js",
-  "postinstall": "npm rebuild sqlite3 --build-from-source"
 }
