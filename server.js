@@ -2,10 +2,12 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const sqlite3 = require('sqlite3').verbose();
 const cron = require('node-cron');
+const cors = require('cors');   // ✅ added
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());                // ✅ allow cross-origin requests
 
 // Connect to SQLite
 const db = new sqlite3.Database('./invoices.db');
@@ -77,7 +79,6 @@ cron.schedule('0 9 * * *', () => {
   });
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
 // Endpoint to list all invoices
 app.get('/invoices', (req, res) => {
   db.all(`SELECT * FROM invoices`, [], (err, rows) => {
@@ -87,3 +88,6 @@ app.get('/invoices', (req, res) => {
     res.json(rows);
   });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
